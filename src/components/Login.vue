@@ -3,14 +3,40 @@
     <div class="login_box">
       <!-- 头像区域 -->
       <div class="avatar_box">
-          <img src="../assets/logo.png" alt="">
+        <img src="../assets/logo.png" alt="">
       </div>
+      <el-form :model="loginForm" label-width="0px" class="login_form" >
+        <el-form-item prop="username">
+          <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user"></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input v-model="loginForm.password" prefix-icon="iconfont icon-lock_fill" type="password"></el-input>
+        </el-form-item>
+        <el-form-item class="btns">
+        <el-button type="primary">登录</el-button>
+        <el-button type="info" @click="resetForm('dynamicValidateForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+    data(){
+        return {
+            loginForm:{
+                username:'',
+                password:''
+            }
+        }
+    },
+    methods: {
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+};
 </script>
 
 <style lang="less" scoped>
@@ -28,24 +54,35 @@ export default {};
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  
+
   .avatar_box {
-      height: 130px;
-      width: 130px;
-      border: 1px  solid #eee;
+    height: 130px;
+    width: 130px;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 0 10px #ddd;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    img {
+      height: 100%;
+      width: 100%;
       border-radius: 50%;
-      padding: 10px;
-      box-shadow: 0 0 10px #ddd;
-      background-color: #fff;
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      img{
-          height: 100%;
-          width: 100%;
-          border-radius: 50%;
-          background-color: #eee;
-      }
+      background-color: #eee;
+    }
   }
-  }
+}
+.login_form{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.btns{
+    display: flex;
+    justify-content: flex-end;
+}
 </style>
